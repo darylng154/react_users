@@ -7,10 +7,18 @@
   "type": "commonjs",
   "main": "backend.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node backend.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "set DEBUG=express.router && nodemon backend.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "express": "^4.21.2"
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jest": "^29.7.0",
+    "mongoose": "^8.9.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
   }
 }
