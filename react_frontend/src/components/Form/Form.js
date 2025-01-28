@@ -7,6 +7,7 @@ function Form(props)
     const [user, setUser] = useState
     (
         {
+            _id: "",
             firstName: "",
             lastName: "",
         }
@@ -14,7 +15,7 @@ function Form(props)
 
     function submitFormData(formData)
     {
-        alert(`Form Submitted '${formData.get("firstName")} ${formData.get("lastName")}'`);
+        alert(`Form Submitted '${formData.get("_id")} ${formData.get("firstName")} ${formData.get("lastName")}'`);
 
         /*  after submitting, fields will be cleared out
             => use user object to keep track
@@ -30,15 +31,23 @@ function Form(props)
 
     function submitForm()
     {
-        alert(`Form Submitted '${user.firstName} ${user.lastName}'`);
+        alert(`Form Submitted '${user._id} ${user.firstName} ${user.lastName}'`);
 
         props.handleSubmit(user);
+    }
+
+    function deleteForm()
+    {
+        alert(`Form Deleted '${user._id} ${user.firstName} ${user.lastName}'`);
+
+        props.handleDelete(user);
     }
 
     function clearForm()
     {
         setUser
         ({
+            _id: "",
             firstName: "",
             lastName: "",
         });
@@ -49,12 +58,16 @@ function Form(props)
         const {name, value} = event.target;
         switch(name)
         {
+            case '_id':
+                setUser({...user, _id: value});
+                break;
+
             case 'firstName':
-                setUser({...user, firstName: value})
+                setUser({...user, firstName: value});
                 break;
 
             case 'lastName':
-                setUser({...user, lastName: value})
+                setUser({...user, lastName: value});
                 break;
 
             default:
@@ -68,6 +81,23 @@ function Form(props)
                 class = "space-y-4 mx-5 flex flex-col"
                 // action={submitFormData}  // only used w/ react.button
             >
+                <div>
+                    <label
+                        // class = "text-xl flex justify-center"    // centers the text
+                        class = "text-xl"
+                        htmlFor='ID'>
+                            ID
+                    </label>
+                </div>
+                <div>
+                    <input 
+                        name = '_id' 
+                        type = 'number' 
+                        value = {user._id}
+                        onChange= {handleTextChange}
+                    />
+                </div>
+
                 <div>
                     <label
                         // class = "text-xl flex justify-center"    // centers the text
@@ -110,6 +140,10 @@ function Form(props)
                     
                     <Button variant = 'contained' onClick={clearForm}>
                         Clear
+                    </Button>
+
+                    <Button variant = 'contained' onClick={deleteForm}>
+                        Delete
                     </Button>
                 </div>
             </form>

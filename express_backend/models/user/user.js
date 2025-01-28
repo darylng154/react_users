@@ -3,6 +3,12 @@ const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema
 (
     {
+        // overrides Mongoose's default _id
+        _id:
+        {
+            type: Number,
+            required: true,
+        },
         firstName: 
         {
             type: String,
@@ -16,7 +22,10 @@ const UserSchema = new mongoose.Schema
             trim: true,
         },
     },
-    { collection: "users_list" }
+    { 
+        collection: "users_list",
+        versionKey: false
+    }
 );
 
 const User = mongoose.model("User", UserSchema);
