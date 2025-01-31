@@ -48,7 +48,6 @@ function App() {
   {
     userAPIs.makeDeleteIdCall(user._id).then( result => 
     {
-      debugger;
       if(result && result.status === 204)
       {
         const updatedList = userList.filter((usersInList) => 
