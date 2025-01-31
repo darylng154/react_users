@@ -23,7 +23,7 @@ app.get("/users", async (req, res) =>
    try
    {
       const db_users = await userServices.getUsers(firstName);
-      res.send({user_list: db_users});
+      res.send({users_list: db_users});
    }
    catch(error)
    {
@@ -75,6 +75,21 @@ app.post("/users", async (req, res) =>
    else
    {
       res.status(500).end();
+   }
+});
+
+app.delete("/users/:id", async (req, res) => 
+{
+   const id = req.params['id'];
+   let result = await userServices.deleteUserById(id);
+
+   if(result === undefined || result == -1)
+   {
+      res.status(404).send("User not found.");
+   }
+   else
+   {
+      res.status(204).end();
    }
 });
 

@@ -7,9 +7,9 @@ function Form(props)
     const [user, setUser] = useState
     (
         {
-            _id: "",
-            firstName: "",
-            lastName: "",
+            _id: '',
+            firstName: '',
+            lastName: '',
         }
     );
 
@@ -47,9 +47,9 @@ function Form(props)
     {
         setUser
         ({
-            _id: "",
-            firstName: "",
-            lastName: "",
+            _id: '',
+            firstName: '',
+            lastName: '',
         });
     }
 

@@ -2,19 +2,21 @@ import './App.css';
 import { VerifiedUser } from '@mui/icons-material';
 import { useState, useEffect } from 'react';
 import Form from './components/Form/Form';
+import _ from 'lodash';
 
 import * as userAPIs from './apis/user-apis';
 
 
 function App() {
-  const [characters, setCharacters] = useState([/*empty Table*/]);
+  const [userList, setUserList] = useState([/*empty Table*/]);
 
   useEffect(() => 
   {
     userAPIs.fetchAll().then( result => 
     {
+      debugger;
        if (result)
-          setCharacters(result);
+        setUserList(result);
     });
  }, [] );
 
@@ -32,24 +34,29 @@ function App() {
   );
 
   function updateUserList(user)
-  {
+  {  
     userAPIs.makePostCall(user).then( result => 
     {
       if(result && result.status === 201)
       {
-        setCharacters([...characters, result.data]);
+        setUserList([...userList, result.data]);
       }
     });
   }
 
   function deleteUserFromList(user)
   {
-    userAPIs.makePostCall(user).then( result => 
+    userAPIs.makeDeleteIdCall(user._id).then( result => 
     {
-      if(result && result.status === 201)
+      debugger;
+      if(result && result.status === 204)
       {
-        console.log(result.data);
-        setCharacters([result.data]);
+        const updatedList = userList.filter((usersInList) => 
+        {
+          return usersInList._id !== parseInt(user._id);
+        });
+
+        setUserList(updatedList);
       }
     });
   }

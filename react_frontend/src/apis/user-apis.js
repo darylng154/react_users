@@ -5,7 +5,7 @@ export async function fetchAll()
   try 
   {
      const response = await axios.get('http://localhost:5000/users');
-     return response.data.users_list;     
+     return response.data.users_list;    
   }
   catch (error)
   {
@@ -34,7 +34,7 @@ export async function makeDeleteIdCall(id)
     try
     {
         const response = await axios.delete(`http://localhost:5000/users/${id}`);
-        return response.data.users_list;
+        return response;
     }
     catch(error)
     {
